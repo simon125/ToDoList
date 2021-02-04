@@ -1,6 +1,6 @@
 {
   "homepage": "https://sledziux.github.io/ToDoList",
-  "name": "ToDoList",
+  "name": "todolist",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
