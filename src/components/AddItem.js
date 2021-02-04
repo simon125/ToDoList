@@ -1,14 +1,9 @@
-const AddItem = ({ value, onChange, onSubmit, onClickEnter }) => {
+const AddItem = ({ value, onChange, onSubmit }) => {
   return (
-    <div>
-      <input
-        type="text"
-        onKeyPress={(e) => onClickEnter(e)}
-        value={value}
-        onChange={(e) => onChange(e)}
-      />
+    <form>
+      <input type="text" value={value} onChange={(e) => onChange(e)} />
       <input type="submit" value="Dodaj" onClick={() => onSubmit()} />
-    </div>
+    </form>
   );
 };
 
