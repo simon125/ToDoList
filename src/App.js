@@ -1,25 +1,68 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import AddItem from "./components/AddItem";
+import List from "./components/List";
+import { data } from "./data/data";
 
-function App() {
+const App = () => {
+  const [value, setValue] = useState("");
+  const [items, setItems] = useState(data);
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+
+  const handleClick = (id) => {
+    let subjects = [...items];
+    subjects[id].isVisible = false;
+
+    setItems(subjects);
+  };
+
+  const handleSubmit = () => {
+    let counter = items[items.length - 1].id;
+    counter++;
+
+    const newItem = {
+      id: counter,
+      text: value,
+      isVisible: true,
+    };
+
+    const subjects = [...items];
+    subjects.push(newItem);
+    setItems(subjects);
+    setValue("");
+  };
+
+  const handleEnterClick = (e) => {
+    if (e.key === "Enter") {
+      let counter = items[items.length - 1].id;
+      counter++;
+
+      const newItem = {
+        id: counter,
+        text: value,
+        isVisible: true,
+      };
+
+      const subjects = [...items];
+      subjects.push(newItem);
+      setItems(subjects);
+      setValue("");
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <AddItem
+        onClickEnter={handleEnterClick}
+        value={value}
+        onSubmit={handleSubmit}
+        onChange={handleChange}
+      />
+      <List items={items} handleClick={handleClick} />
     </div>
   );
-}
+};
 
 export default App;
